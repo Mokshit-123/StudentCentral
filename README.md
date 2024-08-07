@@ -5,29 +5,29 @@ CampusConnect is an intuitive app designed for students to seamlessly access imp
 ## Features
 
 ### Login
-![Login Page](https://github.com/Mokshit-123/StudentCentral/blob/master/samples/loginPage.png)
+<img src="https://github.com/Mokshit-123/StudentCentral/blob/master/samples/loginPage.png" alt="Login Page" width="300"/>
 - Secure login using the ID provided by your institute.
 - Personalized access to your academic information.
 
 ### Notices
-![Notices Page](https://github.com/Mokshit-123/StudentCentral/blob/master/samples/noticesPage.png)
+<img src="https://github.com/Mokshit-123/StudentCentral/blob/master/samples/noticesPage.png" alt="Notices Page" width="300"/>
 - View all notices provided by the institute.
 - Stay updated with the latest announcements and updates.
 - Access related PDFs directly from the app.
 
 ### Attendance
-![Attendance Page](https://github.com/Mokshit-123/StudentCentral/blob/master/samples/attendancePage.png)
+<img src="https://github.com/Mokshit-123/StudentCentral/blob/master/samples/attendancePage.png" alt="Attendance Page" width="300"/>
 - Check your current attendance status.
 - View attendance records for all subjects.
 - Keep track of your attendance percentage to ensure compliance.
 
 ### Profile
-![Profile Page](https://github.com/Mokshit-123/StudentCentral/blob/master/samples/profilePage.png)
+<img src="https://github.com/Mokshit-123/StudentCentral/blob/master/samples/profilePage.png" alt="Profile Page" width="300"/>
 - Access your profile information stored in official documents.
 - View and manage your personal data as recorded by the institute.
 
 ### Search
-![Search Page](https://github.com/Mokshit-123/StudentCentral/blob/master/samples/searchPage.png)
+<img src="https://github.com/Mokshit-123/StudentCentral/blob/master/samples/searchPage.png" alt="Search Page" width="300"/>
 - Search notices and updates quickly and efficiently.
 
 ## Getting Started
