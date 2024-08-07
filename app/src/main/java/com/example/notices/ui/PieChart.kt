@@ -51,7 +51,7 @@ fun DonutPieChart(
     val strokeWidth = 16.dp
 
     var selectedArc by remember { mutableStateOf<Attendance?>(null) }
-    var displayText by remember { mutableStateOf("Overall Attendance: ${String.format("%.2f", 100.0 * totalAttendedClass / totalClasses)} %") }
+    var displayText by remember { mutableStateOf("Overall Attendance: ${100 * totalAttendedClass / totalClasses} %") }
     Box(
         modifier = Modifier
             .size(size)

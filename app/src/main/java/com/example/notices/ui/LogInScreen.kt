@@ -1,5 +1,6 @@
 package com.example.notices.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,7 +16,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -30,6 +31,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -37,6 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.notices.R
 import com.example.notices.viewModels.LoginViewModel
 
 @Composable
@@ -72,7 +76,7 @@ fun LoginScreen(
         .background(MaterialTheme.colorScheme.background)
     ){
         Column (
-            modifier=Modifier.fillMaxSize(),
+            modifier=Modifier.fillMaxSize().padding(50.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ){
@@ -83,13 +87,13 @@ fun LoginScreen(
                     .background(MaterialTheme.colorScheme.primaryContainer),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "logo",
+                Image(
+                    painter = painterResource(id = R.drawable.logo),
+                    contentDescription = null,
                     modifier = Modifier
-                        .padding(8.dp)
-                        .size(100.dp),
-                    tint = MaterialTheme.colorScheme.primary
+                        .clip(CircleShape)
+                        .size(200.dp),
+                    contentScale = ContentScale.FillBounds
                 )
             }
             Spacer(modifier = Modifier.height(10.dp))
@@ -100,64 +104,72 @@ fun LoginScreen(
                 fontSize = 36.sp
             )
             Spacer(modifier = Modifier.height(20.dp))
-            OutlinedTextField(
-                value = username,
-                onValueChange = {
-                    username = it
-                    validateUsername(it)
-                    usernameChanged = true
-                    isLoginEnabled = isUsernameValid && isPasswordValid
-                                },
-                label = {
-                    Text(text = "Username")
-                },
-                isError = usernameChanged && isUsernameValid,
-                singleLine = true
-            )
-           if(usernameChanged && !isUsernameValid){
-               Text(
-                   text = "Username must be an 11 digit number",
-                   color = Color.Red,
-                   modifier = Modifier.align(Alignment.Start)
-               )
-            }
-            Spacer(modifier = Modifier.height(10.dp))
-            OutlinedTextField(
-                value = password,
-                onValueChange ={
-                    password = it
-                    validatePassword(it)
-                    passwordChanged = true
-                    isLoginEnabled = isUsernameValid && isPasswordValid
-                },
-                label = {
-                    Text(text = "Password")
-                },
-                isError = passwordChanged && isPasswordValid,
-                trailingIcon = {
-                               Icon(
-                                   imageVector = if(isPasswordMasked) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
-                                   contentDescription = if(isPasswordMasked) "Show Password" else " Hide Password",
-                                   modifier=Modifier
-                                       .clickable {
-                                           isPasswordMasked = !isPasswordMasked
-                                       }
-                               )
-                },
-                singleLine = true,
-                visualTransformation = if(isPasswordMasked) PasswordVisualTransformation() else VisualTransformation.None
-            )
-            if(passwordChanged && !isPasswordValid){
-                Text(
-                    text = "Password cannot be empty!",
-                    color = Color.Red,
-                    modifier = Modifier.align(Alignment.Start)
+
+            Column(horizontalAlignment = Alignment.Start) {
+                OutlinedTextField(
+                    value = username,
+                    onValueChange = {
+                        username = it
+                        validateUsername(it)
+                        usernameChanged = true
+                        isLoginEnabled = isUsernameValid && isPasswordValid
+                    },
+                    label = {
+                        Text(text = "Username")
+                    },
+                    isError = usernameChanged && !isUsernameValid,
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
                 )
+                if (usernameChanged && !isUsernameValid) {
+                    Text(
+                        text = "Username must be an 11 digit number",
+                        color = Color.Red,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(10.dp))
+
+            Column(horizontalAlignment = Alignment.Start) {
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = {
+                        password = it
+                        validatePassword(it)
+                        passwordChanged = true
+                        isLoginEnabled = isUsernameValid && isPasswordValid
+                    },
+                    label = {
+                        Text(text = "Password")
+                    },
+                    isError = passwordChanged && !isPasswordValid,
+                    trailingIcon = {
+                        Icon(
+                            imageVector = if (isPasswordMasked) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
+                            contentDescription = if (isPasswordMasked) "Show Password" else "Hide Password",
+                            modifier = Modifier.clickable {
+                                isPasswordMasked = !isPasswordMasked
+                            }
+                        )
+                    },
+                    singleLine = true,
+                    visualTransformation = if (isPasswordMasked) PasswordVisualTransformation() else VisualTransformation.None,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                if (passwordChanged && !isPasswordValid) {
+                    Text(
+                        text = "Password cannot be empty!",
+                        color = Color.Red,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+
             Button(
                 onClick = {
-                          logInViewModel.login(username,password)
+                    logInViewModel.login(username, password)
                 },
                 enabled = isLoginEnabled
             ) {
@@ -165,7 +177,6 @@ fun LoginScreen(
             }
         }
     }
-
 }
 
 @Preview(showSystemUi = true, showBackground = true)

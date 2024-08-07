@@ -98,7 +98,7 @@ fun DisplayAttendance(
             modifier = Modifier.padding(8.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.bpit),
+                painter = painterResource(id = R.drawable.notice_provider),
                 contentDescription = null,
                 modifier = Modifier
                     .size(64.dp)

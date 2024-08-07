@@ -63,8 +63,7 @@ import java.time.temporal.ChronoUnit
 this function is used to display a list of notices in card format on screen using a lazy column
 and on clicking card it shows extra information about the notice
  */
-
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NoticesList(
@@ -74,7 +73,9 @@ fun NoticesList(
     onClick: (notice: Notice) -> Unit = { },
     onRefresh:()->Unit = {}
 ) {
-
+    var sortedList = list!!.sortedByDescending {
+        it.timeStamp
+    }
     val isRefreshing by remember { mutableStateOf(false) }
 
     val pullRefreshState = rememberPullRefreshState(refreshing = isRefreshing, onRefresh = onRefresh)
@@ -90,7 +91,7 @@ fun NoticesList(
                 .pullRefresh(pullRefreshState)
         ) {
             if(list!=null) {
-                items(list) { notice ->
+                items(sortedList) { notice ->
                     DisplayNotice(
                         notice = notice,
                         onCardClick = onClick
@@ -110,8 +111,6 @@ fun NoticesList(
     }
 
 }
-
-
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -133,7 +132,7 @@ fun DisplayNotice(
                     .fillMaxWidth()
                     .padding(8.dp)
             ){
-                NoticeIcon(noticeIcon = R.drawable.bpit, modifier = Modifier.align(Alignment.CenterVertically))
+                NoticeIcon(noticeIcon = R.drawable.logo, modifier = Modifier.align(Alignment.CenterVertically))
                 Spacer(modifier = Modifier.width(8.dp))
                 NoticeInformation(
                     title = notice.title,
@@ -144,8 +143,6 @@ fun DisplayNotice(
         }
     }
 }
-
-
 @Composable
 fun NoticeIcon(
     @DrawableRes noticeIcon : Int,
@@ -158,7 +155,7 @@ fun NoticeIcon(
             .size(32.dp)
             .clip(CircleShape)
             .background(Color.White),
-        contentScale = ContentScale.Fit,
+        contentScale = ContentScale.FillBounds,
 
     )
 }
@@ -280,7 +277,7 @@ fun DisplayCheck(){
                     .fillMaxWidth()
                     .padding(8.dp)
             ){
-                NoticeIcon(noticeIcon = R.drawable.bpit, modifier = Modifier.align(Alignment.CenterVertically))
+                NoticeIcon(noticeIcon = R.drawable.logo, modifier = Modifier.align(Alignment.CenterVertically))
                 Spacer(modifier = Modifier.width(8.dp))
                 NoticeInformation(
                     title = "EXTENDED SCHEDULE OF ENROLMENT FOR CENTRALIZED ONLINE COUNSELLING PROCESS FOR ADMISSION IN THE PROGRAMMES MBA. LLB AND LLM FOR ACADEMIC SESSION 2024-25",
