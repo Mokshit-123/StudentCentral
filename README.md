@@ -5,22 +5,30 @@ CampusConnect is an intuitive app designed for students to seamlessly access imp
 ## Features
 
 ### Login
+![Login Page](https://github.com/Mokshit-123/StudentCentral/blob/master/samples/loginPage.png)
 - Secure login using the ID provided by your institute.
 - Personalized access to your academic information.
 
 ### Notices
+![Notices Page](https://github.com/Mokshit-123/StudentCentral/blob/master/samples/noticesPage.png)
 - View all notices provided by the institute.
 - Stay updated with the latest announcements and updates.
 - Access related PDFs directly from the app.
 
 ### Attendance
+![Attendance Page](https://github.com/Mokshit-123/StudentCentral/blob/master/samples/attendancePage.png)
 - Check your current attendance status.
 - View attendance records for all subjects.
 - Keep track of your attendance percentage to ensure compliance.
 
 ### Profile
+![Profile Page](https://github.com/Mokshit-123/StudentCentral/blob/master/samples/profilePage.png)
 - Access your profile information stored in official documents.
 - View and manage your personal data as recorded by the institute.
+
+### Search
+![Search Page](https://github.com/Mokshit-123/StudentCentral/blob/master/samples/searchPage.png)
+- Search notices and updates quickly and efficiently.
 
 ## Getting Started
 
@@ -66,7 +74,6 @@ We welcome contributions to enhance the app. To contribute:
 4. Commit your changes (`git commit -m 'Add new feature'`).
 5. Push to the branch (`git push origin feature-branch`).
 6. Open a pull request.
-
 
 ## Contact
 For support or inquiries, contact:
