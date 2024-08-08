@@ -11,6 +11,8 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.notices.MyApp
 import com.example.notices.data.UserPreferencesRepository
+import com.example.notices.data.logInData.LogInRepository
+import com.example.notices.data.logInData.LogInRequest
 import kotlinx.coroutines.launch
 
 sealed interface LoginUiState {
@@ -21,6 +23,7 @@ sealed interface LoginUiState {
 }
 
 class LoginViewModel(
+    private val logInRepository : LogInRepository,
     private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
 
@@ -43,14 +46,22 @@ class LoginViewModel(
         }
     }
 
-    fun login(username: String, token: String) {
+    fun login(username: String, password: String) {
         viewModelScope.launch {
             try {
-                // Assume successful login here
-                userPreferencesRepository.updateUsername(username)
-                userPreferencesRepository.updateLoginToken(token)
-                userPreferencesRepository.updateLogIn(true)
-                loginUiState = LoginUiState.LoggedIn
+                val logInRequest = LogInRequest(username,password)
+                val logInResponse = logInRepository.login(logInRequest)
+                if(logInResponse.message == "Login successful"){
+                    userPreferencesRepository.updateUsername(username)
+                    userPreferencesRepository.updateLoginToken(logInResponse.token!!)
+                    userPreferencesRepository.updateLogIn(true)
+                    loginUiState = LoginUiState.LoggedIn
+                }
+                else{
+                    Log.d("LoginViewModel", "login: ${logInResponse.message}")
+                    loginUiState = LoginUiState.Error("Invalid Credentials")
+                }
+
             } catch (e: Exception) {
                 Log.e("LoginViewModel", "login: Exception", e)
                 loginUiState = LoginUiState.Error("Login failed")
@@ -74,8 +85,9 @@ class LoginViewModel(
         val factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as MyApp)
+                val logInRepository = application.container.logInRepository
                 val userPreferencesRepository = application.container.userPreferencesRepository
-                LoginViewModel(userPreferencesRepository)
+                LoginViewModel(logInRepository,userPreferencesRepository)
             }
         }
     }

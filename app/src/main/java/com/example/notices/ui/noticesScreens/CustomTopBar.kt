@@ -179,7 +179,7 @@ fun TopBar(
                 TopAppBar(
                     title = {
                         Text(
-                            text = "Notices",
+                            text = "Attendance",
                             style = MaterialTheme.typography.headlineMedium
                         )
                     }

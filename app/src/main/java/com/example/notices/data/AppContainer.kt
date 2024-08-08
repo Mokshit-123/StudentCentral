@@ -45,7 +45,7 @@ interface AppContainer {
 class DefaultAppContainer(context: Context) : AppContainer {
 
 
-    private val BASE_URL = "Enter BASE_URL here"
+    private val BASE_URL ="Enter BASE_URL here"
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))

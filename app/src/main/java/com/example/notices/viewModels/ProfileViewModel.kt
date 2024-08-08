@@ -15,6 +15,7 @@ import com.example.notices.data.UserPreferencesRepository
 import com.example.notices.data.profileData.OfflineProfileRepository
 import com.example.notices.data.profileData.Profile
 import com.example.notices.data.profileData.ProfileRepository
+import com.example.notices.data.profileData.ProfileRequest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import okio.IOException
@@ -70,7 +71,8 @@ class ProfileViewModel(
 
             profileUiState = try {
                 Log.d("ProfileViewModel", "getProfile: fetching profile")
-                val profileResult = profileRepository.getProfile(enrollmentNumber)
+                val profileRequest = ProfileRequest(enrollmentNumber, userPreferencesRepository.loginToken.first()!!)
+                val profileResult = profileRepository.getProfile(profileRequest)
                 offlineProfileRepository.deleteAll()
                 offlineProfileRepository.insertAll(profileResult)
                 ProfileUiState.Success(studentData = profileResult)

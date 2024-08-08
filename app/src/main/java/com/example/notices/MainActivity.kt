@@ -5,6 +5,7 @@ import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
@@ -39,6 +40,7 @@ import com.example.notices.data.BottomNavigationItemDataSource.bottomNavigationI
 import com.example.notices.data.noticeData.Notice
 import com.example.notices.theme.NoticesTheme
 import com.example.notices.ui.AboutUsScreen
+import com.example.notices.ui.LoadingScreen
 import com.example.notices.ui.LoginScreen
 import com.example.notices.ui.SettingsScreen
 import com.example.notices.ui.noticesScreens.NoticeDetails
@@ -69,7 +71,12 @@ class MainActivity : ComponentActivity() {
                 val loginUiState : LoginUiState = logInViewModel.loginUiState
 
                 when(loginUiState){
+                    is LoginUiState.Loading->{
+                        LoadingScreen()
+                    }
                     is LoginUiState.LoggedIn->{
+                        val context = LocalContext.current
+                        Toast.makeText(context, "LoggedIn successfully", Toast.LENGTH_SHORT).show()
                         Surface(modifier = Modifier.fillMaxSize()) {
                             Scaffold(
                                 bottomBar = {
@@ -188,6 +195,8 @@ class MainActivity : ComponentActivity() {
                         LoginScreen()
                     }
                     else->{
+                        val context = LocalContext.current
+                        Toast.makeText(context, "Something went wrong!!", Toast.LENGTH_SHORT).show()
                         LoginScreen()
                     }
                 }

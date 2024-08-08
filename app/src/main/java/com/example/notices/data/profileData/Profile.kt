@@ -19,3 +19,8 @@ data class Profile(
     val fatherName: String?,
     val motherName: String?
 )
+
+data class ProfileRequest(
+    val enrollmentNumber: String,
+    val token : String
+)

@@ -30,6 +30,10 @@ class UserPreferencesRepository(private val dataStore: DataStore<Preferences>) {
         preferences[ENROLLMENT_NUMBER_KEY]
     }
 
+    val loginToken : Flow<String?> = dataStore.data.map {preferences ->
+        preferences[TOKEN_KEY]
+    }
+
     suspend fun updateLoginToken(token: String) {
         dataStore.edit { preferences ->
             preferences[TOKEN_KEY] = token

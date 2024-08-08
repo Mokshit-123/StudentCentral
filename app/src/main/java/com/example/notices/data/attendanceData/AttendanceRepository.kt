@@ -3,7 +3,7 @@ package com.example.notices.data.attendanceData
 import com.example.notices.network.AttendanceApiService
 
 interface AttendanceRepository{
-    suspend fun getAttendance(enrollmentNumber:String):List<Attendance>
+    suspend fun getAttendance(enrollmentNumber:String, token:String):List<Attendance>
 }
 
 interface OfflineAttendanceRepository{
@@ -29,7 +29,7 @@ class DatabaseAttendanceRepository(private val attendanceDao: AttendanceDao):Off
 }
 
 class NetworkAttendanceRepository(private val apiService: AttendanceApiService):AttendanceRepository{
-    override suspend fun getAttendance(enrollmentNumber: String): List<Attendance> {
+    override suspend fun getAttendance(enrollmentNumber: String, token: String): List<Attendance> {
         return apiService.getAttendance(enrollmentNumber=enrollmentNumber)
     }
 }

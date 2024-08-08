@@ -53,9 +53,10 @@ class AttendanceViewModel(
     private fun fetchEnrollmentNumberAndGetAttendance() {
         viewModelScope.launch {
             val enrollmentNumber = userPreferencesRepository.username.first() ?: ""
+            val token = userPreferencesRepository.loginToken.first()?:""
             if (enrollmentNumber.isNotEmpty()) {
                 Log.d("Attendance View model", "fetchEnrollmentNumberAndGetAttendance: $enrollmentNumber")
-                getAttendance(enrollmentNumber)
+                getAttendance(enrollmentNumber,token)
             } else {
                 Log.e("AttendanceViewModel", "No enrollment number found in DataStore")
                 attendanceUiState = AttendanceUiState.Error
@@ -63,13 +64,13 @@ class AttendanceViewModel(
         }
     }
 
-    private fun getAttendance(enrollmentNumber: String) {
+    private fun getAttendance(enrollmentNumber: String, token : String) {
         viewModelScope.launch {
             attendanceUiState = AttendanceUiState.Loading
 
             attendanceUiState = try {
                 Log.d("AttendanceViewModel", "getAttendance: fetching attendance")
-                val attendanceResult = attendanceRepository.getAttendance(enrollmentNumber)
+                val attendanceResult = attendanceRepository.getAttendance(enrollmentNumber,token)
                 offlineAttendanceRepository.deleteAll()
                 offlineAttendanceRepository.insertAll(attendanceResult)
                 AttendanceUiState.Success(
