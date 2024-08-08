@@ -1,6 +1,6 @@
-# CampusConnect
+# StudentCentral
 
-CampusConnect is an intuitive app designed for students to seamlessly access important academic information, including notices, attendance records, and personal profile details. The app aims to enhance the student experience by providing a centralized platform for accessing and managing their academic data.
+StudentCentral is an intuitive app designed for students to seamlessly access important academic information, including notices, attendance records, and personal profile details. The app aims to enhance the student experience by providing a centralized platform for accessing and managing their academic data.
 
 ## Features
 
@@ -45,7 +45,7 @@ CampusConnect is an intuitive app designed for students to seamlessly access imp
 2. **Configure the App:**
    - Clone the repository to your local machine.
      ```bash
-     git clone https://github.com/Mokshit-123/CampusConnect.git
+     git clone https://github.com/Mokshit-123/StudentCentral.git
      ```
    - Open the project in Android Studio.
    - Update the URLs in the network directory of the app to point to your backend server.
@@ -57,7 +57,7 @@ CampusConnect is an intuitive app designed for students to seamlessly access imp
    - Build and run the app on your Android device.
 
 ### Usage
-1. **Open the CampusConnect App:**
+1. **Open the StudentCentral App:**
    - Launch the app on your Android device.
    - Log in using your institute-provided ID.
    - Navigate through the app to access notices, attendance records, and profile information.
